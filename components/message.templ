@@ -1,0 +1,9 @@
+package components
+
+templ Message(text string) {
+	<div hx-swap-oob="beforeend" id="messages">
+		<p class="p-4 rounded border max-w-max border-gray-100 bg-gray-100 m-4">
+			{ text }
+		</p>
+	</div>
+}

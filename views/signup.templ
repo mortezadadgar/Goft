@@ -1,0 +1,45 @@
+package views
+
+templ Signup(data map[string]bool) {
+	@Base() {
+		<div id="container" class="min-h-screen flex justify-center items-center">
+			<form
+				class="flex flex-col gap-3 bg-gray-100 max-w-max p-4 rounded"
+				hx-post="/signup"
+				hx-trigger="submit"
+			>
+				<div class="flex bg-background rounded p-2 w-64">
+					<img class="w-4 mr-2" src="/static/svg/user.svg" alt="user"/>
+					<input
+						class="bg-background w-full outline-none text-white"
+						type="text"
+						name="name"
+						id="password"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				<div class="flex bg-background rounded p-2 w-64">
+					<img class="w-4 mr-2" src="/static/svg/password.svg" alt="password"/>
+					<input
+						class="bg-background w-full outline-none text-white"
+						type="password"
+						name="password"
+						id="name"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				if data["ErrDuplicatedUser"] {
+					<p class="text-red">User already exists</p>
+				}
+				<button
+					class="cursor-pointer bg-blue self-end text-background rounded w-20 p-1"
+					type="submit"
+				>
+					Sign up
+				</button>
+			</form>
+		</div>
+	}
+}

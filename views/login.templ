@@ -1,0 +1,55 @@
+package views
+
+templ Login(data map[string]bool) {
+	@Base() {
+		<div id="container" class="min-h-screen flex justify-center items-center">
+			<form
+				hx-post="/login"
+				hx-swap="outerHTML"
+				hx-target="#container"
+				hx-trigger="submit"
+				hx-push-url="true"
+				class="flex flex-col gap-4 bg-gray-100 p-4 rounded"
+			>
+				<div class="flex bg-background rounded p-2 w-64">
+					<img class="w-4 mr-2" src="/static/svg/user.svg" alt="user"/>
+					<input
+						class="w-full bg-background outline-none text-white"
+						type="text"
+						name="name"
+						id="name"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				<div class="flex bg-background rounded p-2 w-64">
+					<img class="w-4 mr-2" src="/static/svg/password.svg" alt="password"/>
+					<input
+						class="w-full bg-background outline-none text-white"
+						type="password"
+						name="password"
+						id="password"
+						autocomplete="off"
+						required
+					/>
+				</div>
+				<button
+					class="cursor-pointer mb-3 bg-blue self-end text-background rounded w-20 p-1"
+					type="submit"
+				>
+					Login
+				</button>
+				if data["ErrUserNotExists"] {
+					<p class="text-red">User does not exists</p>
+				}
+				if data["ErrInvalidCred"] {
+					<p class="text-red">Invalid user credential</p>
+				}
+				<p class="border-t-[1px] pt-3">
+					Or
+					<a class="hover:text-blue underline" href="/signup">Create a new account</a>
+				</p>
+			</form>
+		</div>
+	}
+}

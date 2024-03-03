@@ -1,0 +1,42 @@
+package views
+
+import "goft/components"
+import "fmt"
+
+templ Chat(userID int, messages []string, roomID int, roomName string) {
+	@Base() {
+		<div class="flex flex-col min-h-screen">
+			<div class="flex items-center gap-2 p-4 w-full bg-gray-100">
+				<img class="w-6" src="/static/svg/chat.svg" alt="chat"/>
+				{ roomName }
+			</div>
+			<ul class="flex flex-col overflow-y-scroll flex-grow" id="messages">
+				@components.Messages(messages)
+			</ul>
+			<form
+				class="[&>*]:p-4 [&>*]:bg-gray-100 flex w-full"
+				hx-ext="ws"
+				ws-connect={ templ.URL(fmt.Sprintf("/ws/%d", roomID)) }
+				ws-send
+				hx-on::ws-after-message="sendMessage(event)"
+			>
+				<input
+					class="flex-grow outline-none w-full placeholder:text-white text-white"
+					id="input-form"
+					type="text"
+					name="message"
+					value=""
+					placeholder="Start conversation..."
+					autocomplete="off"
+					autofocus
+					required
+				/>
+				<input type="hidden" name="user_id" value={ userID }/>
+				<input type="hidden" name="room_id" value={ roomID }/>
+				<button class="cursor-pointer text-white" type="submit">
+					<img class="w-8" src="/static/svg/caret.svg" alt="send"/>
+				</button>
+			</form>
+		</div>
+	}
+}

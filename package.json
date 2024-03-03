@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-go-template": "^0.0.15"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "caniuse-lite": "^1.0.30001610",
+    "tailwindcss": "^4.1.10"
+  }
+}

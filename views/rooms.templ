@@ -1,0 +1,35 @@
+package views
+
+import "goft/components"
+import "goft/types"
+
+templ Rooms(rooms []types.Room) {
+	@Base() {
+		<div class="min-h-screen gap-14 flex flex-col justify-center items-center">
+			<div
+				class="flex flex-col px-7 gap-8 w-[50rem] items-center bg-gray-100 p-4 rounded"
+			>
+				<div
+					class="rounded w-full flex flex-row gap-2 justify-center bg-gray-200 p-2"
+				>
+					<div class="text-white">
+						<img class="w-7" src="/static/svg/search.svg" alt="search"/>
+					</div>
+					<input
+						class="bg-gray-200 flex-grow outline-none"
+						hx-get="/rooms/search"
+						hx-target="#rooms"
+						hx-trigger="keyup changed delay:100ms"
+						hx-swap="outerHTML"
+						type="search"
+						name="search"
+						placeholder="Search chat rooms..."
+						autocomplete="off"
+						autofocus
+					/>
+				</div>
+				@components.RoomsList(rooms)
+			</div>
+		</div>
+	}
+}

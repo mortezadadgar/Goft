@@ -1,0 +1,9 @@
+package components
+
+templ Messages(messages []string) {
+	for _, message := range messages {
+		<li class="p-4 rounded border max-w-max border-gray-100 bg-gray-100 m-4">
+			{ message }
+		</li>
+	}
+}
